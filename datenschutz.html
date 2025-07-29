@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutz – Schlosskeller Emmendingen</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+    <header>
+        <div class="container nav-container">
+            <div class="logo-wrapper">
+                <img src="assets/logo.png" alt="Schlosskeller Emmendingen Logo" class="site-logo" loading="lazy">
+                <span class="logo-text">Schlosskeller&nbsp;Emmendingen</span>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+            <nav role="navigation" aria-label="Hauptnavigation">
+                <ul class="nav-list" id="primary-navigation">
+                    <li><a href="index.html#hero">Start</a></li>
+                    <li><a href="index.html#location">Die&nbsp;Location</a></li>
+                    <li><a href="index.html#events">Veranstaltungen</a></li>
+                    <li><a href="index.html#calendar">Programm</a></li>
+                    <li><a href="index.html#news">News</a></li>
+                    <li><a href="index.html#gallery">Galerie</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content">
+        <section class="section">
+            <div class="container">
+                <h2>Datenschutz</h2>
+                <p>Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen. Nachfolgend informieren wir Sie darüber, welche Daten während Ihres Besuchs erfasst und wie sie verwendet werden.</p>
+                <h3>1.&nbsp;Erhebung und Verarbeitung von Daten</h3>
+                <p>Beim Besuch dieser Website werden keine personenbezogenen Daten gespeichert. Wenn Sie uns per E‑Mail kontaktieren oder das Kontaktformular nutzen, verwenden wir Ihre Angaben ausschließlich zur Bearbeitung Ihrer Anfrage. Eine Weitergabe an Dritte erfolgt nicht ohne Ihre ausdrückliche Einwilligung.</p>
+                <h3>2.&nbsp;Cookies</h3>
+                <p>Diese Seite verwendet lediglich technisch notwendige Cookies, die für den Betrieb der Seite erforderlich sind (z.&nbsp;B. um Ihre Entscheidung im Cookie‑Banner zu speichern). Es werden keine Tracking‑Cookies eingesetzt.</p>
+                <h3>3.&nbsp;Ihre Rechte</h3>
+                <p>Sie haben das Recht auf Auskunft über die bei uns gespeicherten personenbezogenen Daten sowie auf Berichtigung, Löschung oder Einschränkung der Verarbeitung. Bitte wenden Sie sich hierzu an <a href="mailto:schlosskeller.em@web.de">schlosskeller.em@web.de</a>.</p>
+                <h3>4.&nbsp;Kontakt zum Datenschutz</h3>
+                <p>Bei Fragen zum Datenschutz erreichen Sie uns unter der oben genannten Adresse.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-container">
+            <p>&copy; 2025 Schlosskeller&nbsp;Emmendingen</p>
+            <nav>
+                <ul class="footer-nav">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script>
+    (function() {
+        const navToggle = document.getElementById('navToggle');
+        const navList = document.querySelector('.nav-list');
+        navToggle.addEventListener('click', function() {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', (!expanded).toString());
+            navList.classList.toggle('open');
+        });
+        navList.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navList.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    })();
+    </script>
+
+    <!-- Cookie‑Banner für Datenschutzseite -->
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite">
+        <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern. Durch die Nutzung stimmen Sie der Verwendung von Cookies zu.</p>
+        <button id="cookieAccept" class="btn">Verstanden</button>
+    </div>
+    <script>
+    // Cookie‑Banner Script: zeigt den Banner bis der Nutzer zustimmt
+    document.addEventListener('DOMContentLoaded', function() {
+        const banner = document.getElementById('cookieBanner');
+        const acceptBtn = document.getElementById('cookieAccept');
+        if (!localStorage.getItem('cookieConsent')) {
+            banner.style.display = 'flex';
+        }
+        acceptBtn.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'true');
+            banner.style.display = 'none';
+        });
+    });
+    </script>
+</body>
+</html>

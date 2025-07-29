@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum – Schlosskeller Emmendingen</title>
+    <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Zum Inhalt springen</a>
+    <header>
+        <div class="container nav-container">
+            <div class="logo-wrapper">
+                <img src="assets/logo.png" alt="Schlosskeller Emmendingen Logo" class="site-logo" loading="lazy">
+                <span class="logo-text">Schlosskeller&nbsp;Emmendingen</span>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="primary-navigation">&#9776;</button>
+            <nav role="navigation" aria-label="Hauptnavigation">
+                <ul class="nav-list" id="primary-navigation">
+                    <li><a href="index.html#hero">Start</a></li>
+                    <li><a href="index.html#location">Die&nbsp;Location</a></li>
+                    <li><a href="index.html#events">Veranstaltungen</a></li>
+                    <li><a href="index.html#calendar">Programm</a></li>
+                    <li><a href="index.html#news">News</a></li>
+                    <li><a href="index.html#gallery">Galerie</a></li>
+                    <li><a href="index.html#contact">Kontakt</a></li>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content">
+        <section class="section">
+            <div class="container">
+                <h2>Impressum</h2>
+                <p>Angaben gemäß § 5 TMG</p>
+                <p><strong>Schlosskeller e.V.</strong><br>
+                Schlossplatz&nbsp;1<br>
+                79312&nbsp;Emmendingen<br>
+                Deutschland</p>
+                <p><strong>Vertreten durch:</strong><br>
+                den Vorstand: Clara&nbsp;Walser, David&nbsp;Fechner, Martin&nbsp;Fischer</p>
+                <p><strong>Kontakt:</strong><br>
+                E‑Mail: <a href="mailto:schlosskeller.em@web.de">schlosskeller.em@web.de</a></p>
+                <p><strong>Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV:</strong><br>
+                Schlosskeller e.V., Schlossplatz&nbsp;1, 79312 Emmendingen</p>
+                <p><strong>Haftungsausschluss:</strong><br>
+                Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container footer-container">
+            <p>&copy; 2025 Schlosskeller&nbsp;Emmendingen</p>
+            <nav>
+                <ul class="footer-nav">
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="barrierefreiheit.html">Barrierefreiheit</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+    <script>
+    // Navigation toggle for Impressum page
+    (function() {
+        const navToggle = document.getElementById('navToggle');
+        const navList = document.querySelector('.nav-list');
+        navToggle.addEventListener('click', function() {
+            const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+            navToggle.setAttribute('aria-expanded', (!expanded).toString());
+            navList.classList.toggle('open');
+        });
+        navList.querySelectorAll('a').forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    navList.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+    })();
+    </script>
+
+    <!-- Cookie‑Banner für Impressum: analog zur Startseite -->
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite">
+        <p>Diese Website verwendet Cookies, um Ihr Erlebnis zu verbessern. Durch die Nutzung stimmen Sie der Verwendung von Cookies zu.</p>
+        <button id="cookieAccept" class="btn">Verstanden</button>
+    </div>
+    <script>
+    // Cookie‑Banner Script: zeigt den Banner bis der Nutzer zustimmt
+    document.addEventListener('DOMContentLoaded', function() {
+        const banner = document.getElementById('cookieBanner');
+        const acceptBtn = document.getElementById('cookieAccept');
+        if (!localStorage.getItem('cookieConsent')) {
+            banner.style.display = 'flex';
+        }
+        acceptBtn.addEventListener('click', function() {
+            localStorage.setItem('cookieConsent', 'true');
+            banner.style.display = 'none';
+        });
+    });
+    </script>
+</body>
+</html>

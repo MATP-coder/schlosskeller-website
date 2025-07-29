@@ -1,0 +1,1030 @@
+/* Global styles and variables */
+:root {
+    /*
+     * Farben für das neue schwarz‑gelbe Design.  Die Primärfarbe
+     * entspricht dem warmen Goldton des Logos, die Sekundärfarbe
+     * ist ein etwas helleres Gelb für Akzente.  Der Dark‑Wert ist
+     * echtes Schwarz, damit das Logo ohne sichtbare Kante in den
+     * Hintergrund übergehen kann.  Light und White bleiben helle
+     * Neutraltöne für Text und Flächen.
+     */
+    /* Gelbtöne exakt am Logo orientiert: Primärfarbe (Gold) und hellerer Ton für Hover */
+    --color-primary: #d4af37; /* Goldton des Logos (Metallgold) */
+    --color-secondary: #e8c85c; /* hellerer Goldton für Hover‑Zustände */
+    --color-dark: #000000; /* tiefes Schwarz */
+    --color-light: #f5f5f5; /* helles Grau/beige */
+    --color-white: #ffffff;
+    --font-family-heading: 'Georgia', serif;
+    --font-family-body: 'Arial', 'Helvetica', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-body);
+    color: var(--color-dark);
+    line-height: 1.6;
+    background-color: var(--color-light);
+}
+
+/* Sanfte Scroll‑Animation für Ankerlinks */
+html {
+    scroll-behavior: smooth;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* Header and Navigation */
+header {
+    background-color: var(--color-dark);
+    color: var(--color-white);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo wrapper styles */
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.site-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+.logo-text {
+    font-family: var(--font-family-heading);
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: var(--color-primary);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    position: relative;
+}
+
+/* Sprachwechsel-Bar: Flaggenleisten oben rechts im Header.
+   Sie wird absolut positioniert innerhalb des Headers und
+   ordnet die Flaggen nebeneinander an.  Die Größe kann über
+   font-size angepasst werden.  Auf kleineren Bildschirmen
+   wird die Bar ausgeblendet via Media Query. */
+.language-bar {
+    position: absolute;
+    top: 8px;
+    right: 20px;
+    display: flex;
+    gap: 8px;
+    font-size: 1.2rem;
+    z-index: 1500;
+}
+
+.language-bar a {
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.language-bar a:hover {
+    opacity: 0.8;
+}
+
+/* Auf Smartphones blenden wir die Sprachleiste aus, um
+   Kollisionen mit dem Burger-Icon zu vermeiden. */
+@media (max-width: 768px) {
+    .language-bar {
+        display: none;
+    }
+}
+
+.logo {
+    font-family: var(--font-family-heading);
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.nav-list {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-list a {
+    color: var(--color-white);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+.nav-list a:hover {
+    color: var(--color-primary);
+}
+
+/* Hero Section */
+/*
+ * Hero‑Section: Das große Headerbild setzt eine stimmungsvolle Szene in Szene.
+ * Wir verwenden das neu bearbeitete Foto (hero_final.jpg) mit unscharfem
+ * Hintergrund, damit keine harten Kanten zu sehen sind.  Zusätzlich wird
+ * später per ::before eine seitliche Verlaufsmaske hinzugefügt, um den
+ * Übergang zum Rand weich auslaufen zu lassen.  Text bleibt mittig
+ * zentriert, die Höhe orientiert sich an 70 % der Viewport‑Höhe.
+ */
+.hero-section {
+    position: relative;
+    height: 70vh;
+    background-image: url('assets/hero_final.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-white);
+    text-align: center;
+    overflow: hidden;
+}
+
+/*
+ * Hero‑Overlay: Ein halbtransparenter dunkelgrauer Schleier legt sich
+ * über das Hintergrundbild.  Die Verlaufskomponente (Verlaufsmaske)
+ * innerhalb der Farbe sorgt dafür, dass die Ränder stärker abgedunkelt
+ * werden als die Mitte.  Dadurch verschwinden harte Kanten im Bild
+ * vollständig und der Übergang zum schwarzen Seitenrand wird harmonisch.
+ */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.55) 20%,
+        rgba(0, 0, 0, 0.55) 80%,
+        rgba(0, 0, 0, 0.8) 100%);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-content h2 {
+    font-family: var(--font-family-heading);
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    /* Leichte Schattenkante verbessert die Lesbarkeit vor dem Bild */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    /* Schattierung zur besseren Lesbarkeit */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.btn {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    padding: 12px 24px;
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-dark);
+}
+
+/* Section defaults */
+.section {
+    padding: 60px 0;
+}
+
+.section h2 {
+    font-family: var(--font-family-heading);
+    color: var(--color-primary);
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.dark-section {
+    /* Dunkle Abschnitte verwenden tiefes Schwarz als Hintergrund und helle Schrift */
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+.dark-section h2 {
+    color: var(--color-secondary);
+}
+
+/* Features */
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.feature {
+    flex: 1 1 250px;
+    background-color: var(--color-white);
+    border-left: 4px solid var(--color-primary);
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.feature h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+}
+
+/* Event Section */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.event-item {
+    /* Dunkle Karten auf schwarzem Untergrund mit goldener Akzentlinie */
+    background-color: #0a0a0a;
+    border-left: 4px solid var(--color-primary);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hovereffekt für Veranstaltungskarten */
+.event-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.event-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.event-item h3 {
+    color: var(--color-primary);
+    font-size: 1.4rem;
+    margin: 15px;
+}
+
+.event-item p {
+    flex-grow: 1;
+    margin: 0 15px 15px;
+    color: var(--color-light);
+}
+
+.btn-secondary {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    margin: 0 15px 15px;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-dark);
+}
+
+/* Shop spezifische Elemente */
+.shop-banner {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    text-align: center;
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Preisangabe innerhalb der Event‑ und Produktkarten */
+.price {
+    color: var(--color-secondary);
+    font-weight: bold;
+    margin: 0 15px 10px;
+}
+
+/* Gallery */
+.gallery-grid {
+    /* Kreatives Mosaiklayout für die Galerie.  Auto‑flow: dense füllt Lücken, große
+       Elemente (class="large") belegen zwei Spalten und zwei Reihen. */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-auto-rows: 150px;
+    gap: 20px;
+    margin-top: 30px;
+    grid-auto-flow: dense;
+}
+
+/* Galerie‑Elemente */
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Große Galerieelemente belegen zwei Spalten und zwei Zeilen */
+.gallery-item.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+/* Overlay‑Beschriftung */
+.caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--color-light);
+    font-size: 0.9rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover .caption {
+    transform: translateY(0);
+}
+
+/* Layout für die Location‑Section: Text und Bild nebeneinander */
+.location-flex {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.location-text {
+    flex: 1 1 350px;
+}
+
+.location-image {
+    flex: 1 1 300px;
+}
+
+.location-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .location-flex {
+        flex-direction: column;
+    }
+    .location-image,
+    .location-text {
+        flex: 1 1 100%;
+    }
+}
+
+/* Contact Section */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.contact-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.contact-info, .contact-form {
+    flex: 1 1 300px;
+}
+
+.contact-info h3,
+.contact-form h3 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+}
+
+.contact-info p {
+    margin-bottom: 10px;
+    color: var(--color-light);
+}
+
+/* Links in Kontaktinformation treten in Gold hervor */
+.contact-info a {
+    color: var(--color-primary);
+}
+.contact-info a:hover {
+    color: var(--color-secondary);
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid var(--color-primary);
+    border-radius: 3px;
+    font-size: 1rem;
+    background-color: #1a1a1a;
+    color: var(--color-light);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: 2px solid var(--color-primary);
+}
+
+/* Program note within location section */
+.program-note {
+    margin-top: 30px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-dark);
+}
+
+.map-container {
+    margin-top: 30px;
+    height: 300px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    border-radius: 4px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: 20px 0;
+    font-size: 0.9rem;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-nav {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-nav a {
+    color: var(--color-light);
+    transition: color 0.2s;
+}
+
+.footer-nav a:hover {
+    color: var(--color-primary);
+}
+
+/* Language Switcher */
+.language-switcher {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 1.3rem;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.language-switcher a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: normal;
+    line-height: 1;
+}
+.language-switcher a:hover {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+.language-switcher span {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        display: none;
+    }
+}
+
+/* Skip‑Link: für Screenreader sichtbar, beim Fokus eingeblendet */
+.skip-link {
+    position: absolute;
+    left: 0;
+    top: -40px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    padding: 8px 12px;
+    z-index: 1000;
+    transition: top 0.3s;
+    text-decoration: none;
+    font-weight: bold;
+}
+.skip-link:focus {
+    top: 10px;
+}
+
+/* Mikro‑Animationen: heben Features und Highlights subtil an */
+.feature,
+.highlight {
+    transition: transform 0.3s ease;
+}
+.feature:hover,
+.highlight:hover {
+    transform: translateY(-5px);
+}
+
+/* Buttons: Fokus‑Stil für Tastaturnavigation */
+button:focus,
+.btn:focus,
+.btn-secondary:focus,
+.nav-toggle:focus {
+    outline: 2px dashed var(--color-secondary);
+    outline-offset: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero-content h2 {
+        font-size: 2.2rem;
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .feature {
+        flex: 1 1 100%;
+    }
+    .nav-list {
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .event-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Zusätzliche Responsive‑Layouts für Tablet und Smartphone */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* Tablet‑Layout: mittlere Schriftgrößen und zwei Spalten bei Events */
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+    .location-highlights {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .event-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    /* Smartphone‑Layout: kleinere Schrift, einspaltige Grids und angepasste Höhen */
+    .hero-section {
+        height: 60vh;
+    }
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+    .location-highlights {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+    .feature {
+        flex: 1 1 100%;
+        margin-bottom: 20px;
+    }
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+    }
+    /* Expand the mobile navigation dropdown to full width */
+    .nav-list {
+        width: 100%;
+    }
+}
+
+/* Mobile navigation toggle */
+.nav-toggle {
+    display: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--color-white);
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: block;
+    }
+    .nav-list {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        background-color: var(--color-dark);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        padding: 20px;
+        border: 1px solid var(--color-primary);
+        border-radius: 4px;
+    }
+    .nav-list.open {
+        display: flex;
+    }
+    .nav-container {
+        align-items: center;
+    }
+}
+
+/* Location highlights: emphasises key facts of the space */
+.location-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.highlight {
+    background-color: #0a0a0a;
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.highlight:hover {
+    background-color: var(--color-dark);
+    transform: translateY(-4px);
+}
+
+.highlight-number {
+    font-family: var(--font-family-heading);
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+
+.highlight-description {
+    font-size: 0.9rem;
+    color: var(--color-light);
+}
+
+/* ------------------------------------------------------------- */
+/* Erweiterte Funktionalitäten: Kalender, News, Newsletter, Social */
+/* Kalender‑Sektion: listet anstehende Events als Karten */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.calendar-item {
+    background-color: #0a0a0a;
+    color: var(--color-light);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 4px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.calendar-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.calendar-item .date {
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--color-secondary);
+}
+.calendar-item h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+}
+.calendar-item p {
+    flex-grow: 1;
+    margin-bottom: 15px;
+}
+.calendar-item .btn-secondary {
+    align-self: flex-start;
+}
+
+/* News‑Blog Sektion */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.news-item {
+    background-color: #0a0a0a;
+    color: var(--color-light);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.news-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+.news-item img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+.news-item h3 {
+    padding: 15px;
+    color: var(--color-primary);
+    font-size: 1.4rem;
+}
+.news-item p {
+    padding: 0 15px 15px 15px;
+    flex-grow: 1;
+}
+.news-item a.btn-secondary {
+    margin: 0 15px 15px;
+    display: inline-block;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid var(--color-primary);
+    text-align: center;
+}
+.newsletter-section h3 {
+    color: var(--color-primary);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+}
+.newsletter-section p {
+    color: var(--color-light);
+    margin-bottom: 20px;
+}
+.newsletter-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.newsletter-form input[type="email"] {
+    padding: 10px;
+    border: 1px solid var(--color-primary);
+    border-radius: 3px;
+    background-color: #1a1a1a;
+    color: var(--color-light);
+    font-size: 1rem;
+}
+.newsletter-form input[type="email"]:focus {
+    outline: 2px solid var(--color-primary);
+}
+.newsletter-form button {
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.newsletter-form button:hover {
+    background-color: var(--color-secondary);
+}
+
+/* Social Media Wall */
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+.social-grid img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease;
+}
+.social-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* Social Links: präsentiert Instagram und Facebook Kanäle */
+.social-links {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 1rem;
+}
+.social-links a {
+    color: var(--color-primary);
+    font-weight: bold;
+    text-decoration: none;
+}
+.social-links a:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+/* News Carousel Styles */
+.news-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+.news-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    gap: 30px;
+    padding: 10px 0;
+}
+.news-carousel::-webkit-scrollbar {
+    display: none; /* versteckt die Scrollleiste in WebKit‑Browsern */
+}
+.news-item {
+    flex: 0 0 280px;
+    /* Die restlichen Stile werden aus der News‑Sektion geerbt */
+    scroll-snap-align: start;
+}
+.news-prev,
+.news-next {
+    background: none;
+    border: none;
+    color: var(--color-primary);
+    font-size: 2rem;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s;
+}
+.news-prev:hover,
+.news-next:hover {
+    color: var(--color-secondary);
+}
+@media (max-width: 768px) {
+    .news-prev,
+    .news-next {
+        font-size: 1.5rem;
+    }
+}
+
+/* CTA for location section */
+.location-cta {
+    text-align: center;
+    margin-top: 30px;
+}
+
+/*
+ * Cookie‑Banner
+ *
+ * Der Cookie‑Banner informiert Besucher über die Verwendung technisch notwendiger Cookies
+ * und blendet sich erst ein, wenn keine Zustimmung gespeichert ist.  Er sitzt am unteren
+ * Rand der Seite, nutzt die dunkle Farbpalette des Designs und eine goldene Linie als
+ * Trenner.  Auf kleinen Bildschirmen ordnen sich Text und Button untereinander an.
+ */
+.cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0a0a0a;
+    color: var(--color-light);
+    padding: 15px 20px;
+    display: none; /* wird per Skript ein‑/ausgeblendet */
+    z-index: 1000;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.5);
+    border-top: 2px solid var(--color-primary);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.cookie-banner p {
+    margin: 0;
+    flex: 1;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+.cookie-banner .btn {
+    margin: 0;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+@media (max-width: 480px) {
+    .cookie-banner {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cookie-banner .btn {
+        margin-top: 10px;
+    }
+}
